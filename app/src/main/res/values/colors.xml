@@ -1,12 +1,21 @@
 <resources>
-    <color name="primary">#1A5D5B</color>
-    <color name="primary_dark">#0F3E3C</color>
-    <color name="accent">#E8A33D</color>
-    <color name="background">#FAFAFA</color>
-    <color name="surface">#FFFFFF</color>
+    <!-- Indigo brand, matching the invoice PDF's accent for a consistent look end-to-end. -->
+    <color name="primary">#4338CA</color>
+    <color name="primary_dark">#312496</color>
     <color name="on_primary">#FFFFFF</color>
-    <color name="text_primary">#1A1A1A</color>
-    <color name="text_secondary">#6B6B6B</color>
+    <color name="primary_container">#EEF2FF</color>
+    <color name="on_primary_container">#312496</color>
+
+    <color name="accent">#E8A33D</color>
+    <color name="on_accent">#1A1A1A</color>
+
+    <color name="background">#F7F7FB</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#1A1A2C</color>
+    <color name="on_surface_variant">#5B5B6E</color>
+
+    <color name="text_primary">#1A1A2C</color>
+    <color name="text_secondary">#5B5B6E</color>
     <color name="error">#B3261E</color>
-    <color name="divider">#E0E0E0</color>
+    <color name="divider">#E4E4EF</color>
 </resources>

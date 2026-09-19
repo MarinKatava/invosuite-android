@@ -93,7 +93,7 @@
                 android:nestedScrollingEnabled="false" />
 
             <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:id="@+id/addLineButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
