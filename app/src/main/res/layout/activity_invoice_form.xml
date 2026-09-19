@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        app:title="Invoice"
+        app:titleTextColor="@color/on_primary"
+        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
+        app:navigationIconTint="@color/on_primary" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView style="@style/SectionLabel" android:text="Bill to" android:layout_marginTop="0dp" />
+            <Spinner android:id="@+id/clientSpinner" android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Invoice name *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/nameInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Invoice number">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/invoiceNumberInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView style="@style/SectionLabel" android:text="Dates" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Issue date *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/issueDateInput" style="@style/FormInput" android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Period start *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/periodStartInput" style="@style/FormInput" android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Period end *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/periodEndInput" style="@style/FormInput" android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Delivery date">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/deliveryDateInput" style="@style/FormInput" android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Invoicing place">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/invoicingPlaceInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView style="@style/SectionLabel" android:text="Currency &amp; tax" />
+            <Spinner android:id="@+id/currencySpinner" android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="VAT %">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vatPercentInput"
+                    style="@style/FormInput"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="VAT exemption note (if VAT = 0)">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vatExemptTextInput"
+                    style="@style/FormInput"
+                    android:inputType="textMultiLine"
+                    android:minLines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Notes (internal, optional)">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/notesInput"
+                    style="@style/FormInput"
+                    android:inputType="textMultiLine"
+                    android:minLines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView style="@style/SectionLabel" android:text="Line items" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/linesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:id="@+id/addLineButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="+ Add line item" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/background"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:id="@+id/netTotalText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/vatAmountText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/grandTotalText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:text="Save invoice" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

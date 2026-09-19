@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        app:title="Company"
+        app:titleTextColor="@color/on_primary"
+        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
+        app:navigationIconTint="@color/on_primary" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView style="@style/SectionLabel" android:text="Company identity" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Company name *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/nameInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Registration / ID number">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/registrationNumberInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="VAT ID">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/vatIdInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView style="@style/SectionLabel" android:text="Address" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Address *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/addressLineInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="City *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/cityInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Postal code *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/postalCodeInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Country *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/countryInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Invoicing place (e.g. city, country)">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/invoicingPlaceInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView style="@style/SectionLabel" android:text="Banking" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Bank name">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/bankNameInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="IBAN">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/ibanInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="BIC / SWIFT">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/bicInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView style="@style/SectionLabel" android:text="Invoicing defaults" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Default currency"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="8dp" />
+            <Spinner
+                android:id="@+id/currencySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Default VAT % (0 if exempt)">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vatPercentInput"
+                    style="@style/FormInput"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="VAT exemption note (shown on invoice when VAT = 0)">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vatExemptTextInput"
+                    style="@style/FormInput"
+                    android:inputType="textMultiLine"
+                    android:minLines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Save company" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="24dp"
+                android:text="Delete company"
+                android:textColor="@color/error"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
