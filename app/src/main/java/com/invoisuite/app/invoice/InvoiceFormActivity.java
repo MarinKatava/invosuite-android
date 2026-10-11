@@ -70,6 +70,7 @@ public class InvoiceFormActivity extends BaseActivity {
         binding.linesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.linesRecyclerView.setAdapter(lineAdapter);
         binding.addLineButton.setOnClickListener(v -> lineAdapter.addLine());
+        binding.importHoursButton.setOnClickListener(v -> importHours());
 
         binding.issueDateInput.setOnClickListener(v -> pickDate(issueDate, d -> {
             issueDate = d;
@@ -281,10 +282,80 @@ public class InvoiceFormActivity extends BaseActivity {
             draft.unit = item.unit();
             draft.quantity = item.quantity().stripTrailingZeros().toPlainString();
             draft.unitPrice = item.unitPrice().stripTrailingZeros().toPlainString();
+            if (item.timeEntryIds() != null) {
+                draft.timeEntryIds = new ArrayList<>(item.timeEntryIds());
+            }
             lines.add(draft);
         }
         lineAdapter.notifyDataSetChanged();
         recomputeTotals();
+    }
+
+    /** Pulls the chosen client's unbilled imported hours for the invoice period in as ready-made lines. */
+    private void importHours() {
+        if (clients.isEmpty() || binding.clientSpinner.getSelectedItemPosition() < 0) {
+            Toast.makeText(this, "Pick the client first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (periodStart == null || periodEnd == null) {
+            Toast.makeText(this, "Pick the invoicing period first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        long clientId = clients.get(binding.clientSpinner.getSelectedItemPosition()).id();
+
+        setLoading(true);
+        api.timeSummary(companyId, clientId, periodStart.toString(), periodEnd.toString()).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<List<TimeSummaryLine>> call, Response<List<TimeSummaryLine>> response) {
+                setLoading(false);
+                if (!response.isSuccessful() || response.body() == null) {
+                    Toast.makeText(InvoiceFormActivity.this, ApiErrors.message(response, "Could not load time bookings"), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                addImportedLines(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<TimeSummaryLine>> call, Throwable t) {
+                setLoading(false);
+                Toast.makeText(InvoiceFormActivity.this, "Network error: " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void addImportedLines(List<TimeSummaryLine> summary) {
+        // Drop untouched blank rows (e.g. the one a new invoice starts with) to make room for the imported lines.
+        lines.removeIf(l -> l.projectName.isEmpty() && l.quantity.isEmpty() && l.unitPrice.isEmpty());
+
+        int added = 0;
+        java.math.BigDecimal totalHours = BigDecimal.ZERO;
+        for (TimeSummaryLine s : summary) {
+            boolean alreadyOnInvoice = lines.stream().anyMatch(l -> !java.util.Collections.disjoint(l.timeEntryIds, s.timeEntryIds()));
+            if (alreadyOnInvoice) {
+                continue;
+            }
+            InvoiceLineDraft draft = new InvoiceLineDraft();
+            draft.projectId = s.projectId();
+            draft.projectName = s.projectName();
+            draft.unit = s.unit() != null ? s.unit() : "Hour";
+            draft.quantity = s.hours().stripTrailingZeros().toPlainString();
+            draft.unitPrice = s.unitPrice() != null ? s.unitPrice().stripTrailingZeros().toPlainString() : "";
+            draft.timeEntryIds = new ArrayList<>(s.timeEntryIds());
+            lines.add(draft);
+            added++;
+            totalHours = totalHours.add(s.hours());
+        }
+        if (lines.isEmpty()) {
+            lineAdapter.addLine();
+        }
+        lineAdapter.notifyDataSetChanged();
+        recomputeTotals();
+
+        if (added == 0) {
+            Toast.makeText(this, "No unbilled hours for this client in the period. Import time bookings first, or check the period.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Added " + added + " line(s), " + totalHours.stripTrailingZeros().toPlainString() + " hours", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void recomputeTotals() {
@@ -339,7 +410,8 @@ public class InvoiceFormActivity extends BaseActivity {
             try {
                 itemRequests.add(new InvoiceItemRequest(
                         line.projectId, line.projectName, line.unit,
-                        new BigDecimal(line.quantity), new BigDecimal(line.unitPrice)));
+                        new BigDecimal(line.quantity), new BigDecimal(line.unitPrice),
+                        line.timeEntryIds));
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Quantity and unit price must be numbers", Toast.LENGTH_LONG).show();
                 return;

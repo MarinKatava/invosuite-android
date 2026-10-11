@@ -14,10 +14,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary"
-            android:elevation="4dp"
+            android:background="@color/surface"
+            android:elevation="0dp"
             app:title="Your companies"
-            app:titleTextColor="@color/on_primary"
+            app:titleTextColor="@color/on_surface"
+        app:titleTextAppearance="@style/TextAppearance.InvoiSuite.ToolbarTitle"
             app:menu="@menu/menu_company_list" />
 
         <TextView
@@ -52,7 +53,8 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
         android:contentDescription="Add company"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/accent" />
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/on_primary"
+        app:backgroundTint="@color/primary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

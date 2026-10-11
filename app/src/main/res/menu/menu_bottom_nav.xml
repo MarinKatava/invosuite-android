@@ -3,13 +3,17 @@
     <item
         android:id="@+id/nav_clients"
         android:title="Clients"
-        android:icon="@android:drawable/ic_menu_myplaces" />
+        android:icon="@drawable/ic_people" />
     <item
         android:id="@+id/nav_projects"
         android:title="Projects"
-        android:icon="@android:drawable/ic_menu_agenda" />
+        android:icon="@drawable/ic_work" />
+    <item
+        android:id="@+id/nav_time"
+        android:title="Time"
+        android:icon="@drawable/ic_schedule" />
     <item
         android:id="@+id/nav_invoices"
         android:title="Invoices"
-        android:icon="@android:drawable/ic_menu_edit" />
+        android:icon="@drawable/ic_receipt" />
 </menu>

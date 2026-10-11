@@ -7,6 +7,8 @@ public class InvoiceLineDraft {
     public String unit = "Hour";
     public String quantity = "";
     public String unitPrice = "";
+    /** Imported time bookings this line bills; sent back so they are marked as billed. */
+    public java.util.List<Long> timeEntryIds = new java.util.ArrayList<>();
 
     public java.math.BigDecimal lineTotal() {
         try {

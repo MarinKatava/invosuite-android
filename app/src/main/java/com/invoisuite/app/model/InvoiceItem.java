@@ -1,6 +1,7 @@
 package com.invoisuite.app.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public record InvoiceItem(
         Long id,
@@ -9,6 +10,7 @@ public record InvoiceItem(
         String unit,
         BigDecimal quantity,
         BigDecimal unitPrice,
-        BigDecimal lineTotal
+        BigDecimal lineTotal,
+        List<Long> timeEntryIds
 ) {
 }

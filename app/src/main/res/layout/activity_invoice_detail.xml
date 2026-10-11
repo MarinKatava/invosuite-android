@@ -9,10 +9,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
-        app:titleTextColor="@color/on_primary"
-        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
-        app:navigationIconTint="@color/on_primary"
+        android:background="@color/surface"
+        app:titleTextColor="@color/on_surface"
+        app:titleTextAppearance="@style/TextAppearance.InvoiSuite.ToolbarTitle"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/on_surface"
         app:menu="@menu/menu_invoice_detail" />
 
     <ScrollView
@@ -38,8 +39,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textStyle="bold"
-                android:textColor="@color/primary" />
+                android:textStyle="bold" 
+                android:background="@drawable/bg_pill"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:gravity="center"
+                android:includeFontPadding="false" />
 
             <TextView
                 android:id="@+id/metaText"
@@ -61,9 +66,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/background"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="0dp">
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/divider"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,7 +115,10 @@
                 android:id="@+id/downloadPdfButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Download / share PDF" />
+                android:text="Download / share PDF" 
+            app:icon="@drawable/ic_download"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/downloadXlsxButton"
@@ -117,7 +127,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
-                android:text="Download / share Excel" />
+                android:text="Download / share Excel" 
+            app:icon="@drawable/ic_download"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

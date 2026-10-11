@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/surface"
+        app:title="Time tracking connection"
+        app:titleTextColor="@color/on_surface"
+        app:titleTextAppearance="@style/TextAppearance.InvoiSuite.ToolbarTitle"
+        app:navigationIcon="@drawable/ic_close"
+        app:navigationIconTint="@color/on_surface" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView style="@style/SectionLabel" android:text="Connection" android:layout_marginTop="0dp" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Name *">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/nameInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Server URL * (https://company.odoo.com)">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/urlInput"
+                    style="@style/FormInput"
+                    android:inputType="textUri" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Database name (needed for older Odoo)">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/dbInput" style="@style/FormInput" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView style="@style/SectionLabel" android:text="Odoo version / API" />
+            <Spinner
+        android:background="@drawable/bg_spinner"
+        android:paddingStart="16dp"
+        android:paddingEnd="44dp" android:id="@+id/apiModeSpinner" android:layout_width="match_parent" android:layout_height="56dp" />
+
+            <TextView style="@style/SectionLabel" android:text="Credentials" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Login (email) *">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/usernameInput"
+                    style="@style/FormInput"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/apiKeyLayout"
+                style="@style/FormField"
+                app:passwordToggleEnabled="true"
+                android:hint="API key *">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/apiKeyInput"
+                    style="@style/FormInput"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/apiKeyHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="12sp"
+                android:text="Create an API key in Odoo under Preferences &gt; Account Security. It is stored encrypted on the server and never sent back to this app."
+                android:textColor="@color/text_secondary" />
+
+            <TextView style="@style/SectionLabel" android:text="Book imported hours to" />
+            <Spinner
+        android:background="@drawable/bg_spinner"
+        android:paddingStart="16dp"
+        android:paddingEnd="44dp" android:id="@+id/companySpinner" android:layout_width="match_parent" android:layout_height="56dp" />
+
+            <TextView style="@style/SectionLabel" android:text="Client for new projects" />
+            <Spinner
+        android:background="@drawable/bg_spinner"
+        android:paddingStart="16dp"
+        android:paddingEnd="44dp" android:id="@+id/clientSpinner" android:layout_width="match_parent" android:layout_height="56dp" />
+
+            <TextView style="@style/SectionLabel" android:text="Import settings" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/onlyMineSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Only my own bookings" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Import the last N days (1-730)">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lookbackInput"
+                    style="@style/FormInput"
+                    android:inputType="number"
+                    android:text="45" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/FormField" android:hint="Default hourly rate for new projects">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rateInput"
+                    style="@style/FormInput"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/activeSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:checked="true"
+                android:text="Active (included in &quot;Import time bookings&quot;)" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/testButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Test connection"
+                android:textAllCaps="false" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Save"
+                android:textAllCaps="false" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/importButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Import time bookings now"
+                android:textAllCaps="false"
+                android:visibility="gone" 
+            app:icon="@drawable/ic_sync"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteButton"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="24dp"
+                android:text="Delete connection"
+                android:textColor="@color/error"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

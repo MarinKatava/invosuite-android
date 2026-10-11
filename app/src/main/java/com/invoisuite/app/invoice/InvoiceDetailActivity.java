@@ -107,7 +107,7 @@ public class InvoiceDetailActivity extends BaseActivity {
     private void render(Invoice inv) {
         binding.toolbar.setTitle(inv.invoiceNumber());
         binding.nameText.setText(inv.name());
-        binding.statusText.setText(inv.status());
+        com.invoisuite.app.common.StatusStyle.apply(binding.statusText, inv.status());
 
         String meta = "Client: " + inv.clientName()
                 + "\nIssue date: " + inv.issueDate().format(DATE_FORMAT)

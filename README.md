@@ -34,6 +34,34 @@ that generate a PDF or Excel file on the backend.
      a real build.
 4. Run the app on an emulator or device (API 26+).
 
+## Look and feel
+
+- **Palette**: calm deep teal (`#0F766E`) with soft green-tinted neutrals, defined once in
+  `app/src/main/res/values/colors.xml`; the invoice PDF uses the same accent.
+- **Typeface**: [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans) (SIL Open Font
+  License 1.1, text in `licenses/`), bundled as static Regular/Medium/SemiBold files in `res/font/`.
+  Android only reliably renders a family's "normal" and "bold" faces, so *bold* is mapped to the
+  SemiBold cut: titles, names and button labels get a refined emphasis rather than a heavy one.
+- Icons are vector drawables in `res/drawable/ic_*.xml`; light theme only (see `themes.xml`).
+
+## Importing time bookings (Odoo)
+
+- **Menu ▸ Time tracking** (company list) manages your connections: server URL, database, login,
+  API key, which company the hours are booked to, which client new projects belong to, how many
+  days back to import, default rate. **Test connection** checks the settings before saving.
+- The company's **Time** tab has the **Import time bookings** button: it imports from all your active
+  connections and shows what was added/updated/removed, then lists the bookings (billed ones are marked).
+- On a new invoice, **Import hours from time bookings** fills line items with the client's unbilled
+  hours for the invoice period; saving the invoice marks those hours as billed.
+- Credentials are stored encrypted on the server and never sent back to the app.
+
+## Debug builds and plain HTTP
+
+Android blocks cleartext HTTP by default. `app/src/debug/` adds a network security config that
+permits it **only for `10.0.2.2` and `localhost`** so the debug build can reach a backend on your
+machine; release builds stay HTTPS-only. To test on a physical device against a backend on your LAN,
+add that machine's address to `app/src/debug/res/xml/network_security_config.xml`.
+
 ## Building with Docker
 
 An Android app has no headless "server" mode — it's a UI you run on a device

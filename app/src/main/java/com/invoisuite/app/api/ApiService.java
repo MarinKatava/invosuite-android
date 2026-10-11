@@ -101,4 +101,38 @@ public interface ApiService {
     @Streaming
     @GET("api/companies/{companyId}/invoices/{invoiceId}/xlsx")
     Call<ResponseBody> downloadInvoiceXlsx(@Path("companyId") long companyId, @Path("invoiceId") long invoiceId);
+
+    // --- Time tracking integrations (e.g. Odoo) ---
+    @GET("api/integrations")
+    Call<List<IntegrationConnection>> listIntegrations();
+
+    @GET("api/integrations/{id}")
+    Call<IntegrationConnection> getIntegration(@Path("id") long id);
+
+    @POST("api/integrations")
+    Call<IntegrationConnection> createIntegration(@Body IntegrationRequest request);
+
+    @PUT("api/integrations/{id}")
+    Call<IntegrationConnection> updateIntegration(@Path("id") long id, @Body IntegrationRequest request);
+
+    @DELETE("api/integrations/{id}")
+    Call<Void> deleteIntegration(@Path("id") long id);
+
+    /** Tests unsaved form values; pass connectionId on edit so a blank API key reuses the stored one. */
+    @POST("api/integrations/test")
+    Call<ConnectionTestResult> testIntegration(@Body IntegrationRequest request, @Query("connectionId") Long connectionId);
+
+    @POST("api/integrations/{id}/sync")
+    Call<SyncResult> syncIntegration(@Path("id") long id);
+
+    /** The "import time bookings" button: imports from all active connections, optionally for one company. */
+    @POST("api/integrations/sync")
+    Call<List<SyncResult>> syncAllIntegrations(@Query("companyId") Long companyId);
+
+    @GET("api/companies/{companyId}/time-entries")
+    Call<List<TimeEntry>> listTimeEntries(@Path("companyId") long companyId, @Query("from") String from, @Query("to") String to);
+
+    @GET("api/companies/{companyId}/time-entries/summary")
+    Call<List<TimeSummaryLine>> timeSummary(@Path("companyId") long companyId, @Query("clientId") long clientId,
+                                            @Query("from") String from, @Query("to") String to);
 }

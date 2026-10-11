@@ -26,14 +26,18 @@
 
         <activity
             android:name=".auth.LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.InvoiSuite.Auth">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".auth.RegisterActivity" android:exported="false" />
+        <activity
+            android:name=".auth.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.InvoiSuite.Auth" />
 
         <activity android:name=".company.CompanyListActivity" android:exported="false" />
         <activity android:name=".company.CompanyFormActivity" android:exported="false" />
@@ -41,6 +45,9 @@
 
         <activity android:name=".client.ClientFormActivity" android:exported="false" />
         <activity android:name=".project.ProjectFormActivity" android:exported="false" />
+
+        <activity android:name=".integration.IntegrationListActivity" android:exported="false" />
+        <activity android:name=".integration.IntegrationFormActivity" android:exported="false" />
 
         <activity android:name=".invoice.InvoiceFormActivity" android:exported="false" />
         <activity android:name=".invoice.InvoiceDetailActivity" android:exported="false" />

@@ -42,7 +42,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         InvoiceSummary invoice = items.get(position);
         holder.binding.nameText.setText(invoice.name());
-        holder.binding.statusText.setText(invoice.status());
+        com.invoisuite.app.common.StatusStyle.apply(holder.binding.statusText, invoice.status());
         holder.binding.detailText.setText(
                 invoice.invoiceNumber() + " · " + invoice.clientName() + " · " + invoice.issueDate().format(DATE_FORMAT));
         holder.binding.totalText.setText(

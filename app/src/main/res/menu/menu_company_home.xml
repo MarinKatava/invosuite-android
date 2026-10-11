@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_time_tracking"
+        android:title="Time tracking settings"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_edit_company"
         android:title="Edit company"
         app:showAsAction="never" />

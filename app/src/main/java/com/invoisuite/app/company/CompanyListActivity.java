@@ -49,6 +49,10 @@ public class CompanyListActivity extends BaseActivity {
     }
 
     private boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == com.invoisuite.app.R.id.action_time_tracking) {
+            startActivity(new Intent(this, com.invoisuite.app.integration.IntegrationListActivity.class));
+            return true;
+        }
         if (item.getItemId() == com.invoisuite.app.R.id.action_sign_out) {
             SessionManager.getInstance(this).clear();
             startActivity(new Intent(this, LoginActivity.class)
@@ -84,6 +88,7 @@ public class CompanyListActivity extends BaseActivity {
     private void openCompany(Company company) {
         startActivity(new Intent(this, CompanyHomeActivity.class)
                 .putExtra(CompanyHomeActivity.EXTRA_COMPANY_ID, company.id())
-                .putExtra(CompanyHomeActivity.EXTRA_COMPANY_NAME, company.name()));
+                .putExtra(CompanyHomeActivity.EXTRA_COMPANY_NAME, company.name())
+                .putExtra(CompanyHomeActivity.EXTRA_COMPANY_SUBTITLE, company.city() + ", " + company.country()));
     }
 }

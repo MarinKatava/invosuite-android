@@ -42,6 +42,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
         Company company = items.get(position);
         holder.binding.nameText.setText(company.name());
         holder.binding.detailText.setText(company.city() + ", " + company.country());
+        holder.binding.avatarText.setText(com.invoisuite.app.common.TextFormat.initials(company.name()));
         holder.binding.getRoot().setOnClickListener(v -> listener.onCompanyClick(company));
     }
 

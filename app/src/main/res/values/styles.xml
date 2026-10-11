@@ -14,10 +14,23 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">8dp</item>
+        <item name="boxBackgroundColor">@color/surface</item>
     </style>
 
     <style name="FormInput">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- Screen titles in the app bar: semibold, a touch larger. -->
+    <style name="TextAppearance.InvoiSuite.ToolbarTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <!-- Button labels (filled / outlined / tonal / text): emphasised like the titles. -->
+    <style name="TextAppearance.InvoiSuite.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

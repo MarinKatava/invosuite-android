@@ -15,19 +15,39 @@
 
         <item name="colorSecondary">@color/accent</item>
         <item name="colorOnSecondary">@color/on_accent</item>
+        <!-- Drives the selected-tab pill and tonal buttons. -->
+        <item name="colorSecondaryContainer">@color/primary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_primary_container</item>
 
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/on_surface</item>
         <item name="colorSurfaceVariant">@color/background</item>
         <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="actionMenuTextColor">@color/primary</item>
+        <item name="colorError">@color/error</item>
+        <!-- No elevation tint: raised cards stay clean white instead of picking up a coloured cast. -->
+        <item name="elevationOverlayEnabled">false</item>
+
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
+
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.InvoiSuite.LabelLarge</item>
 
         <item name="android:colorBackground">@color/background</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
+        <!-- Light system bars blend into the white app bar and bottom tabs. -->
+        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 
-    <style name="Theme.InvoiSuite.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!-- Sign-in / register screens open with a coloured banner, so the status bar matches it. -->
+    <style name="Theme.InvoiSuite.Auth" parent="Theme.InvoiSuite">
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

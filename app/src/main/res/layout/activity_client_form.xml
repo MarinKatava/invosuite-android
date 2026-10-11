@@ -9,11 +9,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
+        android:background="@color/surface"
         app:title="Client"
-        app:titleTextColor="@color/on_primary"
-        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
-        app:navigationIconTint="@color/on_primary" />
+        app:titleTextColor="@color/on_surface"
+        app:titleTextAppearance="@style/TextAppearance.InvoiSuite.ToolbarTitle"
+        app:navigationIcon="@drawable/ic_close"
+        app:navigationIconTint="@color/on_surface" />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -1,21 +1,35 @@
 <resources>
-    <!-- Indigo brand, matching the invoice PDF's accent for a consistent look end-to-end. -->
-    <color name="primary">#4338CA</color>
-    <color name="primary_dark">#312496</color>
+    <!-- Brand: calm deep teal, shading into cyan for gradients. Chosen to be easy on the eyes:
+         moderate saturation, soft green-tinted neutrals, no pure-white page background.
+         The invoice PDF uses the same teal accent. -->
+    <color name="primary">#0F766E</color>
+    <color name="primary_dark">#115E59</color>
+    <color name="brand_secondary">#0E7490</color>
     <color name="on_primary">#FFFFFF</color>
-    <color name="primary_container">#EEF2FF</color>
-    <color name="on_primary_container">#312496</color>
+    <color name="primary_container">#D5EFEA</color>
+    <color name="on_primary_container">#083B36</color>
 
-    <color name="accent">#E8A33D</color>
-    <color name="on_accent">#1A1A1A</color>
+    <!-- Money / success. Same family as the brand so the app reads as one calm palette. -->
+    <color name="accent">#0F766E</color>
+    <color name="accent_container">#D5EFEA</color>
+    <color name="on_accent">#FFFFFF</color>
 
-    <color name="background">#F7F7FB</color>
+    <!-- Neutrals: slightly green-tinted greys. -->
+    <color name="background">#F2F6F5</color>
     <color name="surface">#FFFFFF</color>
-    <color name="on_surface">#1A1A2C</color>
-    <color name="on_surface_variant">#5B5B6E</color>
+    <color name="on_surface">#14232A</color>
+    <color name="on_surface_variant">#5C6E6C</color>
+    <color name="text_primary">#14232A</color>
+    <color name="text_secondary">#5C6E6C</color>
+    <color name="divider">#DCE6E4</color>
+    <color name="outline">#8FA6A2</color>
+    <color name="error">#C93B3B</color>
 
-    <color name="text_primary">#1A1A2C</color>
-    <color name="text_secondary">#5B5B6E</color>
-    <color name="error">#B3261E</color>
-    <color name="divider">#E4E4EF</color>
+    <!-- Status pills. -->
+    <color name="status_neutral_bg">#E1E9E7</color>
+    <color name="status_neutral_text">#44564F</color>
+    <color name="status_info_bg">#DBEAFE</color>
+    <color name="status_info_text">#1D4ED8</color>
+    <color name="status_success_bg">#D1FAE5</color>
+    <color name="status_success_text">#047857</color>
 </resources>
