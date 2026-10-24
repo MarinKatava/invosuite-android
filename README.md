@@ -47,7 +47,7 @@ that generate a PDF or Excel file on the backend.
 ## Importing time bookings (Odoo)
 
 - **Menu ▸ Time tracking** (company list) manages your connections: server URL, database, login,
-  API key, which company the hours are booked to, which client new projects belong to, how many
+  password (or API key, your choice of login method), which company the hours are booked to, which client new projects belong to, how many
   days back to import, default rate. **Test connection** checks the settings before saving.
 - The company's **Time** tab has the **Import time bookings** button: it imports from all your active
   connections and shows what was added/updated/removed, then lists the bookings (billed ones are marked).

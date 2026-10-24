@@ -32,10 +32,18 @@ public class IntegrationFormActivity extends BaseActivity {
 
     public static final String EXTRA_INTEGRATION_ID = "integration_id";
 
-    private static final String[] API_MODE_CODES = {"JSON2", "JSONRPC"};
+    private static final String[] API_MODE_CODES = {"SESSION", "JSON2", "JSONRPC"};
     private static final String[] API_MODE_LABELS = {
-            "Odoo 19 or newer (JSON-2, API key)",
+            "Login and password (any Odoo version)",
+            "API key (Odoo 19 or newer, JSON-2)",
             "Older Odoo (JSON-RPC, password or API key)"};
+    private static final String[] SECRET_NAMES = {"Password", "API key", "Password or API key"};
+    private static final String[] SECRET_HELP = {
+            "Your normal Odoo login password. It is stored encrypted on the server and never sent back to this app. "
+                    + "Accounts with two-factor authentication need an API key instead.",
+            "Create an API key in Odoo under Preferences > Account Security. It is stored encrypted on the server "
+                    + "and never sent back to this app.",
+            "Your Odoo password or an API key. It is stored encrypted on the server and never sent back to this app."};
 
     private ActivityIntegrationFormBinding binding;
     private ApiService api;
@@ -69,6 +77,17 @@ public class IntegrationFormActivity extends BaseActivity {
         binding.importButton.setVisibility(editing ? View.VISIBLE : View.GONE);
 
         binding.apiModeSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, API_MODE_LABELS));
+        binding.apiModeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updateSecretTexts();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        updateSecretTexts();
         companyAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, companyLabels);
         binding.companySpinner.setAdapter(companyAdapter);
         clientAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, clientLabels);
@@ -189,11 +208,11 @@ public class IntegrationFormActivity extends BaseActivity {
         binding.activeSwitch.setChecked(c.active());
 
         hasStoredKey = c.hasApiKey();
-        binding.apiKeyLayout.setHint(hasStoredKey ? "API key (leave blank to keep the saved one)" : "API key *");
 
         for (int i = 0; i < API_MODE_CODES.length; i++) {
             if (API_MODE_CODES[i].equals(c.apiMode())) binding.apiModeSpinner.setSelection(i);
         }
+        updateSecretTexts();
 
         pendingClientId = c.clientId();
         for (int i = 0; i < companies.size(); i++) {
@@ -203,6 +222,14 @@ public class IntegrationFormActivity extends BaseActivity {
             }
         }
         loadClients(c.companyId());
+    }
+
+    /** Labels the secret field (password vs API key) to match the selected login method. */
+    private void updateSecretTexts() {
+        int mode = Math.max(0, binding.apiModeSpinner.getSelectedItemPosition());
+        String name = SECRET_NAMES[mode];
+        binding.apiKeyLayout.setHint(hasStoredKey ? name + " (leave blank to keep the saved one)" : name + " *");
+        binding.apiKeyHelp.setText(SECRET_HELP[mode]);
     }
 
     /** Builds the request from the form, or returns null after telling the user what is missing. */
@@ -226,7 +253,7 @@ public class IntegrationFormActivity extends BaseActivity {
             return null;
         }
         if (apiKey.isEmpty() && !hasStoredKey) {
-            toast("Enter the API key");
+            toast("Enter the " + SECRET_NAMES[binding.apiModeSpinner.getSelectedItemPosition()].toLowerCase());
             return null;
         }
 

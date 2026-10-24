@@ -43,7 +43,7 @@
                 <com.google.android.material.textfield.TextInputEditText android:id="@+id/dbInput" style="@style/FormInput" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView style="@style/SectionLabel" android:text="Odoo version / API" />
+            <TextView style="@style/SectionLabel" android:text="Login method" />
             <Spinner
         android:background="@drawable/bg_spinner"
         android:paddingStart="16dp"
@@ -62,7 +62,7 @@
                 android:id="@+id/apiKeyLayout"
                 style="@style/FormField"
                 app:passwordToggleEnabled="true"
-                android:hint="API key *">
+                android:hint="Password *">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/apiKeyInput"
                     style="@style/FormInput"
